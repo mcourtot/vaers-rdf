@@ -10,7 +10,7 @@ A step by step tutorial to generate RDF from the VAERS data at http://vaers.hhs.
 You will need:
  * a database in which to load the CSV file and the corresponding schema distributed under this project's SVN
  * the mapping file distributed under this project's SVN
-   * if you have the MedDRA distribution please refer to this page to see how to load it and use the mappingVAERSMEDDRA.ttl file
+   * if you have the MedDRA distribution please refer to [http://code.google.com/p/vaers-rdf/wiki/Load_MedDRA this page] to see how to load it and use the mappingVAERSMEDDRA.ttl file
    * if you don't have the MedDRA distribution you can use the mapping.ttl file
  * the d2rq server to generate the RDF dump (from http://d2rq.org/)
 
