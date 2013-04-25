@@ -1,0 +1,731 @@
+@prefix map: <#> .
+@prefix db: <> .
+@prefix vocab: <vocab/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix d2rq: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#> .
+@prefix jdbc: <http://d2rq.org/terms/jdbc/> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix vaers: <http://purl.org/vaers/> .
+
+### throughout the file, URI patterns are kept relative to allow browsing through the d2r interface. When exporting the dump, the relative URI is specified with -b "http://purl.org/vaers/" 
+
+
+map:database a d2rq:Database;
+	d2rq:jdbcDriver "com.mysql.jdbc.Driver";
+	d2rq:jdbcDSN "jdbc:mysql://localhost:8889/2013VAERS";
+	d2rq:username "root";
+	d2rq:password "root";
+	jdbc:autoReconnect "true";
+	jdbc:zeroDateTimeBehavior "convertToNull";
+	.
+
+# Table VAERSDATA
+
+map:VAERSDATA_VAERS_ID a d2rq:ClassMap;
+d2rq:dataStorage map:database;
+	d2rq:class vocab:VAERSDATA_VAERS_ID;
+	d2rq:uriPattern "@@VAERSDATA.VAERS_ID|urlify@@";
+	d2rq:classDefinitionLabel "VAERS report"@en;
+	d2rq:column "VAERSDATA.VAERS_ID";
+	d2rq:datatype xsd:integer;
+	.
+map:VAERSDATA_RECVDATE a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_RECVDATE;
+	d2rq:propertyDefinitionLabel "VAERSDATA RECVDATE"@en;
+	d2rq:column "VAERSDATA.RECVDATE";
+	.
+	
+	
+
+	
+map:VAERSDATA_STATE a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_STATE;
+	d2rq:propertyDefinitionLabel "VAERSDATA STATE"@en;
+	d2rq:column "VAERSDATA.STATE";
+	d2rq:condition "VAERSDATA.STATE <> ''";
+	.
+	
+map:VAERSDATA_AGE_YRS a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_AGE_YRS;
+	d2rq:propertyDefinitionLabel "VAERSDATA AGE_YRS"@en;
+	d2rq:column "VAERSDATA.AGE_YRS";
+	d2rq:condition "VAERSDATA.AGE_YRS <> ''";
+	.
+	
+map:VAERSDATA_CAGE_YRS a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_CAGE_YRS;
+	d2rq:propertyDefinitionLabel "VAERSDATA CAGE_YRS"@en;
+	d2rq:column "VAERSDATA.CAGE_YRS";
+	d2rq:condition "VAERSDATA.CAGE_YRS <> ''";
+	.
+	
+map:VAERSDATA_CAGE_MO a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_CAGE_MO;
+	d2rq:propertyDefinitionLabel "VAERSDATA CAGE_MO"@en;
+	d2rq:column "VAERSDATA.CAGE_MO";
+	d2rq:condition "VAERSDATA.CAGE_MO <> ''";
+	.
+	
+map:VAERSDATA_SEX a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_SEX;
+	d2rq:propertyDefinitionLabel "VAERSDATA SEX"@en;
+	d2rq:column "VAERSDATA.SEX";
+	d2rq:condition "VAERSDATA.SEX <> ''";
+	.
+	
+map:VAERSDATA_RPT_DATE a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_RPT_DATE;
+	d2rq:propertyDefinitionLabel "VAERSDATA RPT_DATE"@en;
+	d2rq:column "VAERSDATA.RPT_DATE";
+	d2rq:condition "VAERSDATA.RPT_DATE <> ''";
+	.
+	
+map:VAERSDATA_Symptom_text a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_Symptom_text;
+	d2rq:propertyDefinitionLabel "VAERSDATA Symptom_text"@en;
+	d2rq:column "VAERSDATA.Symptom_text";
+	.
+	
+	
+map:VAERSDATA_DIED a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_DIED;
+	d2rq:propertyDefinitionLabel "VAERSDATA DIED"@en;
+	d2rq:column "VAERSDATA.DIED";
+	d2rq:condition "VAERSDATA.DIED <> ''";
+	.
+
+map:VAERSDATA_DATE_DIED a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_DATE_DIED;
+	d2rq:propertyDefinitionLabel "VAERSDATA DATE_DIED"@en;
+	d2rq:column "VAERSDATA.DATE_DIED";
+	d2rq:condition "VAERSDATA.DATE_DIED <> ''";
+	.
+	map:VAERSDATA_L_Threat a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_L_Threat;
+	d2rq:propertyDefinitionLabel "VAERSDATA L_Threat"@en;
+	d2rq:column "VAERSDATA.L_Threat";
+	d2rq:condition "VAERSDATA.L_Threat <> ''";
+	.
+	
+	map:VAERSDATA_ER_Visit a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_ER_Visit;
+	d2rq:propertyDefinitionLabel "VAERSDATA ER_Visit"@en;
+	d2rq:column "VAERSDATA.ER_Visit";
+	d2rq:condition "VAERSDATA.ER_Visit <> ''";
+	.
+	
+	map:VAERSDATA_Hospital a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_Hospital;
+	d2rq:propertyDefinitionLabel "VAERSDATA Hospital"@en;
+	d2rq:column "VAERSDATA.Hospital";
+	d2rq:condition "VAERSDATA.Hospital <> ''";
+	.
+	
+	map:VAERSDATA_HospDays a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_HospDays;
+	d2rq:propertyDefinitionLabel "VAERSDATA HospDays"@en;
+	d2rq:column "VAERSDATA.HospDays";
+	d2rq:condition "VAERSDATA.HospDays <> ''";
+	.
+	
+	map:VAERSDATA_X_STAY a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_X_STAY;
+	d2rq:propertyDefinitionLabel "VAERSDATA X_STAY"@en;
+	d2rq:column "VAERSDATA.X_STAY";
+	d2rq:condition "VAERSDATA.X_STAY <> ''";
+	.
+	
+	map:VAERSDATA_DISABLE a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_DISABLE;
+	d2rq:propertyDefinitionLabel "VAERSDATA DISABLE"@en;
+	d2rq:column "VAERSDATA.DISABLE";
+	d2rq:condition "VAERSDATA.DISABLE <> ''";
+	.
+	
+	map:VAERSDATA_RECOVD a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_RECOVD;
+	d2rq:propertyDefinitionLabel "VAERSDATA RECOVD"@en;
+	d2rq:column "VAERSDATA.RECOVD";
+	d2rq:condition "VAERSDATA.RECOVD <> ''";
+	.
+	
+	map:VAERSDATA_VAX_DATE a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_VAX_DATE;
+	d2rq:propertyDefinitionLabel "VAERSDATA VAX_DATE"@en;
+	d2rq:column "VAERSDATA.VAX_DATE";
+	d2rq:condition "VAERSDATA.VAX_DATE <> ''";
+	.
+	
+	map:VAERSDATA_ONSET_DATE a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_ONSET_DATE;
+	d2rq:propertyDefinitionLabel "VAERSDATA ONSET_DATE"@en;
+	d2rq:column "VAERSDATA.ONSET_DATE";
+	d2rq:condition "VAERSDATA.ONSET_DATE <> ''";
+	.
+	
+	map:VAERSDATA_NUMDAYS a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_NUMDAYS;
+	d2rq:propertyDefinitionLabel "VAERSDATA NUMDAYS"@en;
+	d2rq:column "VAERSDATA.NUMDAYS";
+	d2rq:condition "VAERSDATA.NUMDAYS <> ''";
+	.
+	
+	map:VAERSDATA_LAB_DATA a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_LAB_DATA;
+	d2rq:propertyDefinitionLabel "VAERSDATA LAB_DATA"@en;
+	d2rq:column "VAERSDATA.LAB_DATA";
+	d2rq:condition "VAERSDATA.LAB_DATA <> ''";
+	.
+	
+	map:VAERSDATA_V_ADMINBY a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_V_ADMINBY;
+	d2rq:propertyDefinitionLabel "VAERSDATA V_ADMINBY"@en;
+	d2rq:column "VAERSDATA.V_ADMINBY";
+	d2rq:condition "VAERSDATA.V_ADMINBY <> ''";
+	.
+	
+	map:VAERSDATA_V_FUNDBY a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_V_FUNDBY;
+	d2rq:propertyDefinitionLabel "VAERSDATA V_FUNDBY"@en;
+	d2rq:column "VAERSDATA.V_FUNDBY";
+	d2rq:condition "VAERSDATA.V_FUNDBY <> ''";
+	.
+	
+	map:VAERSDATA_OTHER_MED a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_OTHER_MED;
+	d2rq:propertyDefinitionLabel "VAERSDATA OTHER_MED"@en;
+	d2rq:column "VAERSDATA.OTHER_MED";
+	d2rq:condition "VAERSDATA.OTHER_MED <> ''";
+	.
+	
+	map:VAERSDATA_CURR_ILL a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_CURR_ILL;
+	d2rq:propertyDefinitionLabel "VAERSDATA CURR_ILL"@en;
+	d2rq:column "VAERSDATA.CURR_ILL";
+	d2rq:condition "VAERSDATA.CURR_ILL <> ''";
+	.
+	
+	map:VAERSDATA_History a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_History;
+	d2rq:propertyDefinitionLabel "VAERSDATA History"@en;
+	d2rq:column "VAERSDATA.History";
+	d2rq:condition "VAERSDATA.History <> ''";
+	.
+	
+	map:VAERSDATA_Prior_Vax a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_Prior_Vax;
+	d2rq:propertyDefinitionLabel "VAERSDATA Prior_Vax"@en;
+	d2rq:column "VAERSDATA.Prior_Vax";
+	d2rq:condition "VAERSDATA.Prior_Vax <> ''";
+	.
+	
+	map:VAERSDATA_SPLTTYPE a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:VAERSDATA_SPLTTYPE;
+	d2rq:propertyDefinitionLabel "VAERSDATA SPLTTYPE"@en;
+	d2rq:column "VAERSDATA.SPLTTYPE";
+	d2rq:condition "VAERSDATA.SPLTTYPE <> ''";
+	.
+
+####################################################################################################################################################################################################################
+####################################################################################################################################################################################################################
+######################################################################################## SYMPTOMS #######################################################################################################	
+####################################################################################################################################################################################################################
+####################################################################################################################################################################################################################
+
+	
+	
+	
+
+
+map:VAERSSYMPTOMS_SYMPTOM_1 a d2rq:ClassMap;
+d2rq:dataStorage map:database;
+	#d2rq:uriPattern "@@VAERSSYMPTOMS.SYMPTOM_1|urlify@@";
+	d2rq:uriPattern "http://purl.bioontology.org/ontology/MDR/@@VAERSSYMPTOMS.llt1_code@@"; # we reuse the MedDRA URIs that are generated by bioportal
+	d2rq:classDefinitionLabel "VAERSSYMPTOMS SYMPTOM_1"@en;
+	d2rq:column "VAERSSYMPTOMS.SYMPTOM_1";
+	d2rq:join "VAERSDATA.VAERS_ID => VAERSSYMPTOMS.VAERS_ID";
+	d2rq:condition "VAERSSYMPTOMS.SYMPTOM_1 <> ''";
+	.
+
+
+# I will not process versions numbers at this stage. Reason is that I don't know if "Chills" coded in report 117893 in MedDRA 8.1 is the same "Chills" that was coded in report 336390 in MedDRA version 11.1
+# I assume that for mining purposes they are equivalent, there fore the "Chills" across reports (and independently of the version they were coded against) have the same URI (which is built on their label rather than a combination abel-version)	
+#map:VAERSSYMPTOMS_SymptomVersion1 a d2rq:PropertyBridge;
+#	d2rq:belongsToClassMap map:VAERSSYMPTOMS_SYMPTOM_1;
+#	d2rq:property vocab:has_symptom_version;
+#	d2rq:propertyDefinitionLabel "VAERSSYMPTOMS SymptomVersion1"@en;
+#	d2rq:column "VAERSSYMPTOMS.SymptomVersion1";
+#	d2rq:join "VAERSDATA.VAERS_ID => VAERSSYMPTOMS.VAERS_ID";
+#	.
+	
+	
+
+
+# Add the label (i.e., value of the column) as property of the instance created above
+map:symptom1Label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSSYMPTOMS_SYMPTOM_1;
+	d2rq:property rdfs:label;
+	d2rq:pattern "@@VAERSSYMPTOMS.SYMPTOM_1@@"@en;
+	d2rq:condition "VAERSSYMPTOMS.SYMPTOM_1 <> ''";
+	.
+	
+	
+	
+	# Associate the instance created above to the instance of the report map:VAERSDATA_VAERS_ID by joining on the VAERS_ID values
+	# despite it being the same proprety used across the various instances of symtpoms, we need to specifcially associate each column
+map:has_symptom_1 a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vaers:has_symptom; # same property across the 5 symptoms
+	d2rq:propertyDefinitionLabel "has_symptom"@en;
+	d2rq:refersToClassMap map:VAERSSYMPTOMS_SYMPTOM_1;
+	d2rq:join "VAERSDATA.VAERS_ID => VAERSSYMPTOMS.VAERS_ID";
+	.
+	
+
+	
+map:VAERSSYMPTOMS_SYMPTOM_2 a d2rq:ClassMap;
+d2rq:dataStorage map:database;
+	#d2rq:uriPattern "@@VAERSSYMPTOMS.SYMPTOM_2|urlify@@";
+	d2rq:uriPattern "http://purl.bioontology.org/ontology/MDR/@@VAERSSYMPTOMS.llt2_code@@"; # we reuse the MedDRA URIs that are generated by bioportal
+	d2rq:classDefinitionLabel "VAERSSYMPTOMS SYMPTOM_2"@en;
+	d2rq:column "VAERSSYMPTOMS.SYMPTOM_2";
+	d2rq:join "VAERSDATA.VAERS_ID => VAERSSYMPTOMS.VAERS_ID";
+	d2rq:condition "VAERSSYMPTOMS.SYMPTOM_2 <> ''";
+	.
+
+
+# Add the label (i.e., value of the column) as property of the instance created above
+map:symptom2Label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSSYMPTOMS_SYMPTOM_2;
+	d2rq:property rdfs:label;
+	d2rq:pattern "@@VAERSSYMPTOMS.SYMPTOM_2@@"@en;
+	d2rq:condition "VAERSSYMPTOMS.SYMPTOM_2 <> ''";
+	.
+	
+	
+		
+	# Associate the instance created above to the instance of the report map:VAERSDATA_VAERS_ID by joining on the VAERS_ID values
+map:has_symptom_2 a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vaers:has_symptom;
+	d2rq:propertyDefinitionLabel "has_symptom"@en;
+	d2rq:refersToClassMap map:VAERSSYMPTOMS_SYMPTOM_2;
+	d2rq:join "VAERSDATA.VAERS_ID => VAERSSYMPTOMS.VAERS_ID";
+	.
+
+	
+	map:VAERSSYMPTOMS_SYMPTOM_3 a d2rq:ClassMap;
+d2rq:dataStorage map:database;
+	#d2rq:uriPattern "@@VAERSSYMPTOMS.SYMPTOM_3|urlify@@";
+	d2rq:uriPattern "http://purl.bioontology.org/ontology/MDR/@@VAERSSYMPTOMS.llt3_code@@"; # we reuse the MedDRA URIs that are generated by bioportal
+	d2rq:classDefinitionLabel "VAERSSYMPTOMS SYMPTOM_3"@en;
+	d2rq:column "VAERSSYMPTOMS.SYMPTOM_3";
+	d2rq:join "VAERSDATA.VAERS_ID => VAERSSYMPTOMS.VAERS_ID";
+	d2rq:condition "VAERSSYMPTOMS.SYMPTOM_3 <> ''";
+	.
+
+
+# Add the label (i.e., value of the column) as property of the instance created above
+map:symptom3Label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSSYMPTOMS_SYMPTOM_3;
+	d2rq:property rdfs:label;
+	d2rq:pattern "@@VAERSSYMPTOMS.SYMPTOM_3@@"@en;
+	d2rq:condition "VAERSSYMPTOMS.SYMPTOM_3 <> ''";
+	.
+	
+	
+		
+	# Associate the instance created above to the instance of the report map:VAERSDATA_VAERS_ID by joining on the VAERS_ID values
+map:has_symptom_3 a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vaers:has_symptom;
+	d2rq:propertyDefinitionLabel "has_symptom"@en;
+	d2rq:refersToClassMap map:VAERSSYMPTOMS_SYMPTOM_3;
+	d2rq:join "VAERSDATA.VAERS_ID => VAERSSYMPTOMS.VAERS_ID";
+	.
+	
+	
+	map:VAERSSYMPTOMS_SYMPTOM_4 a d2rq:ClassMap;
+d2rq:dataStorage map:database;
+	#d2rq:uriPattern "@@VAERSSYMPTOMS.SYMPTOM_4|urlify@@";
+	d2rq:uriPattern "http://purl.bioontology.org/ontology/MDR/@@VAERSSYMPTOMS.llt4_code@@"; # we reuse the MedDRA URIs that are generated by bioportal
+	d2rq:classDefinitionLabel "VAERSSYMPTOMS SYMPTOM_4"@en;
+	d2rq:column "VAERSSYMPTOMS.SYMPTOM_4";
+	d2rq:join "VAERSDATA.VAERS_ID => VAERSSYMPTOMS.VAERS_ID";
+	d2rq:condition "VAERSSYMPTOMS.SYMPTOM_4 <> ''";
+	.
+
+
+# Add the label (i.e., value of the column) as property of the instance created above
+map:symptom4Label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSSYMPTOMS_SYMPTOM_4;
+	d2rq:property rdfs:label;
+	d2rq:pattern "@@VAERSSYMPTOMS.SYMPTOM_4@@"@en;
+	d2rq:condition "VAERSSYMPTOMS.SYMPTOM_4 <> ''";
+	.
+	
+	
+		
+	# Associate the instance created above to the instance of the report map:VAERSDATA_VAERS_ID by joining on the VAERS_ID values
+map:has_symptom_4 a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vaers:has_symptom;
+	d2rq:propertyDefinitionLabel "has_symptom"@en;
+	d2rq:refersToClassMap map:VAERSSYMPTOMS_SYMPTOM_4;
+	d2rq:join "VAERSDATA.VAERS_ID => VAERSSYMPTOMS.VAERS_ID";
+	.
+
+	
+	map:VAERSSYMPTOMS_SYMPTOM_5 a d2rq:ClassMap;
+d2rq:dataStorage map:database;
+	#d2rq:uriPattern "@@VAERSSYMPTOMS.SYMPTOM_5|urlify@@";
+	d2rq:uriPattern "http://purl.bioontology.org/ontology/MDR/@@VAERSSYMPTOMS.llt5_code@@"; # we reuse the MedDRA URIs that are generated by bioportal
+	d2rq:classDefinitionLabel "VAERSSYMPTOMS SYMPTOM_5"@en;
+	d2rq:column "VAERSSYMPTOMS.SYMPTOM_5";
+	d2rq:join "VAERSDATA.VAERS_ID => VAERSSYMPTOMS.VAERS_ID";
+	d2rq:condition "VAERSSYMPTOMS.SYMPTOM_5 <> ''";
+	.
+
+
+# Add the label (i.e., value of the column) as property of the instance created above
+map:symptom5Label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSSYMPTOMS_SYMPTOM_5;
+	d2rq:property rdfs:label;
+	d2rq:pattern "@@VAERSSYMPTOMS.SYMPTOM_5@@"@en;
+	d2rq:condition "VAERSSYMPTOMS.SYMPTOM_5 <> ''";
+	.
+	
+	
+		
+	# Associate the instance created above to the instance of the report map:VAERSDATA_VAERS_ID by joining on the VAERS_ID values
+map:has_symptom_5 a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vaers:has_symptom;
+	d2rq:propertyDefinitionLabel "has_symptom"@en;
+	d2rq:refersToClassMap map:VAERSSYMPTOMS_SYMPTOM_5;
+	d2rq:join "VAERSDATA.VAERS_ID => VAERSSYMPTOMS.VAERS_ID";
+	.
+
+	
+
+
+	
+
+
+
+
+	
+	
+####################################################################################################################################################################################################################
+####################################################################################################################################################################################################################
+######################################################################################## VACCINE INFORMATION #######################################################################################################	
+####################################################################################################################################################################################################################
+####################################################################################################################################################################################################################
+# Vaccine information is a separate class as more than one vaccine can be used per report
+# We need to build the vaccine information per instance of vaccine used (vaccine name, manufacturer, lot, route, dose….)
+# and then associated that info with the global VAERS report
+	
+	
+################# Vaccine name ##########################################################################################################
+	
+map:VAERSVAX_VAX_NAME a d2rq:ClassMap;
+d2rq:dataStorage map:database;
+	d2rq:uriPattern "@@VAERSVAX.VAX_NAME|urlify@@";
+	#d2rq:class obo:VO_0000001; #VO class vaccine #vaccines are instances of the specific subclasses
+	d2rq:classDefinitionLabel "vaccine"@en;
+	d2rq:column "VAERSVAX_VAX_NAME";
+	d2rq:condition "VAERSVAX.VAX_NAME <> ''";
+	.
+	
+	# Add the label (i.e., value of the column) as property of the instance created above
+map:vaccineLabel a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSVAX_VAX_NAME;
+	d2rq:property rdfs:label;
+	d2rq:pattern "@@VAERSVAX.VAX_NAME@@"@en;
+	d2rq:condition "VAERSVAX.VAX_NAME <> ''";
+	.
+	
+	# Associate the instance created above to the instance of the report map:VAERSDATA_VAERS_ID by joining on the VAERS_ID values
+	# takes its value from the class map:VAERSVAX_VAXNAME
+map:has_vaccine1 a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vaers:has_vaccine;
+	d2rq:propertyDefinitionLabel "has_vaccine"@en;
+	d2rq:refersToClassMap map:VAERSVAX_VAX_NAME;
+	d2rq:join "VAERSDATA.VAERS_ID => VAERSVAX.VAERS_ID";
+	.
+
+
+
+
+
+################# Vaccine type ##########################################################################################################  
+# we use d2rq:property rdf:type; to indicate that the vaccine types are instances of the classes vaccine types in VO
+# we then use the translation table to replace database values (e.g., "HEPA") by the correct VO value.
+
+map:VAERSVAX_VAX_TYPE a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSVAX_VAX_NAME;
+	d2rq:property rdf:type;
+	d2rq:propertyDefinitionLabel "VAERSVAX VAX_TYPE"@en;
+	d2rq:uriColumn "VAERSVAX.VAX_TYPE";
+	d2rq:translateWith map:VaccineTypeTable;
+	d2rq:join "VAERSDATA.VAERS_ID => VAERSVAX.VAERS_ID";
+	d2rq:condition "VAERSVAX.VAX_NAME <> ''";
+	.
+
+
+# we use a translation table to map the values from the database to the proper classes/terms. See http://vaers.hhs.gov/data/README_January2013.pdf for the abbreviations definition.	
+
+map:VaccineTypeTable a d2rq:TranslationTable;
+    d2rq:translation [ d2rq:databaseValue "6VAX-F"; d2rq:rdfValue vaers:6VAX-F];#VAERS:
+    d2rq:translation [ d2rq:databaseValue "ADEN"; d2rq:rdfValue vaers:ADEN];#VAERS:
+    d2rq:translation [ d2rq:databaseValue "ADEN_4_7"; d2rq:rdfValue vaers:ADEN_4_7];#VAERS:
+    d2rq:translation [ d2rq:databaseValue "ANTH"; d2rq:rdfValue obo:VO_0000013];#VAERS: #VO:Bacillus anthracis vaccine
+    d2rq:translation [ d2rq:databaseValue "BCG"; d2rq:rdfValue obo:VO_0000771];#VAERS: #VO:BCG vaccine
+    d2rq:translation [ d2rq:databaseValue "CEE"; d2rq:rdfValue vaers:CEE];#VAERS:
+    d2rq:translation [ d2rq:databaseValue "CHOL"; d2rq:rdfValue obo:VO_0000763];#VAERS: #VO:Vibrio cholerae vaccine  
+    d2rq:translation [ d2rq:databaseValue "DPIPV"; d2rq:rdfValue vaers:DPIPV];#VAERS:DIPHTHERIA,PERTUSSIS + INACTIVATED POLIO VIRUS
+    d2rq:translation [ d2rq:databaseValue "DPP"; d2rq:rdfValue vaers:DPP];#VAERS:DIPHTHERIA/PERTUSSIS/POLIO (ORAL [LIVE OR INACTIVATED NOT NOTED])
+    d2rq:translation [ d2rq:databaseValue "DT"; d2rq:rdfValue vaers:other];#VAERS:DIPHTHERIA AND TETANUS TOXOIDS, PEDIATRIC #VO:not linked to VO_0000732, Diphtheria-Tetanus vaccine, as it doesn't mention pediatric   
+    d2rq:translation [ d2rq:databaseValue "DTAP"; d2rq:rdfValue obo:VO_0000738];#VAERS:DIPHTHERIA AND TETANUS TOXOIDS AND ACELLULAR PERTUSSIS VACCINE #VO:Diphtheria-Tetanus-Pertussis vaccine (synonym says DTaP)         
+    d2rq:translation [ d2rq:databaseValue "DTAPH"; d2rq:rdfValue vaers:DTAPH];#VAERS:DIPHTHERIA AND TETANUS TOXOIDS AND ACELLULAR PERTUSSIS VACCINE + HAEMOPHILUS B CONJUGATE VACCINE #VO: not linked to VO0000942 as this one needs acellular pertussis
+    d2rq:translation [ d2rq:databaseValue "DTAPHEPBIP"; d2rq:rdfValue obo:VO_0000743];#VAERS:DIPHTHERIA AND TETANUS TOXOIDS AND ACELLULAR PERTUSSIS VACCINE + HEPATITIS B + INACTIVATED POLIOVIRUS VACCINE #VO:Diphtheria-Tetanus-Pertussis-Poliovirus-Hepatitis B vaccine
+    d2rq:translation [ d2rq:databaseValue "DTAPIPV"; d2rq:rdfValue obo:VO_0000742];#VAERS:DIPHTHERIA AND TETANUS TOXOIDS AND ACELLULAR PERTUSSIS VACCINE + INACTIVATED POLIOVIRUS VACCINE #VO:Diphtheria-Tetanus-Pertussis-Poliovirus vaccine
+    d2rq:translation [ d2rq:databaseValue "DTAPIPVHIb"; d2rq:rdfValue obo:VO_0000744];#VAERS:DIPHTHERIA AND TETANUS TOXOIDS AND ACELLULAR PERTUSSIS VACCINE + INACTIVATED POLIOVIRUS VACCINE + HAEMOPHILUS B CONJUGATE VACCINE #VO:Diphtheria-Tetanus-Pertussis-Poliovirus-Haemophilus b vaccine
+    d2rq:translation [ d2rq:databaseValue "DTIPV"; d2rq:rdfValue vaers:DTIPV];#VAERS:DIPHTHERIA AND TETANUS TOXOIDS, PEDIATRIC + INACTIVATED POLIOVIRUS VACCINE
+    d2rq:translation [ d2rq:databaseValue "DTOX"; d2rq:rdfValue obo:VO_0000735];#VAERS:DIPHTHERIA TOXOID #VO:diphtheria vaccine
+    d2rq:translation [ d2rq:databaseValue "DTP"; d2rq:rdfValue obo:VO_0000738];#VAERS:DIPHTHERIA AND TETANUS TOXOIDS AND PERTUSSIS VACCINE #VO:Diphtheria-Tetanus-Pertussis vaccine
+    d2rq:translation [ d2rq:databaseValue "DTPHEP"; d2rq:rdfValue vaers:DTPHEP];#VAERS:DIPHTHERIA,TETANUS, PERTUSSIS + HEPATITIS B
+    d2rq:translation [ d2rq:databaseValue "DTPPHIB"; d2rq:rdfValue obo:VO_0000942];#VAERS:DIPHTHERIA AND TETANUS TOXOIDS AND PERTUSSIS VACCINE + HAEMOPHILUS B CONJUGATE VACCINE #VO:Diphtheria-Tetanus-Pertussis-Haemophilus b vaccine
+     d2rq:translation [ d2rq:databaseValue "DTPPHIB"; d2rq:rdfValue obo:VO_0000744];#VAERS:DIPHTHERIA AND TETANUS TOXOIDS AND PERTUSSIS VACCINE + INACTIVATED POLIOVIRUS VACCINE + HAEMOPHILUS B CONJUGATE VACCINE (TETANUS TOXOID CONJUGATE) #VO:Diphtheria-Tetanus-Pertussis-Poliovirus-Haemophilus b vaccine
+    d2rq:translation [ d2rq:databaseValue "DTPIHI"; d2rq:rdfValue vaers:DTPIHI];#VAERS:DIPHTHERIA/TETANUS/WHOLE PERTUSSIS+INACTIVATED POLIO VIRUS+HAEMOPHILUS INFLUENZA B #VO:
+    d2rq:translation [ d2rq:databaseValue "DTPIPV"; d2rq:rdfValue vaers:DTPIPV ];#VAERS:DIPHTHERIA AND TETANUS TOXOIDS AND PERTUSSIS VACCINE + INACTIVATED POLIOVIRUS VACCINE #VO:  
+    d2rq:translation [ d2rq:databaseValue "FLU"; d2rq:rdfValue obo:VO_0000642];#VAERS:INFLUENZA VIRUS VACCINE #VO:Influenza virus vaccine
+    d2rq:translation [ d2rq:databaseValue "FLU(HD)"; d2rq:rdfValue vaers:FLUHD]; #VAERS:INFLUENZA VIRUS VACCINE HIGH DOSE
+    d2rq:translation [ d2rq:databaseValue "FLU(H1N1)"; d2rq:rdfValue vaers:FLUH1N1];#VAERS:INFLUENZA(H1N1)MONOVALENT
+    d2rq:translation [ d2rq:databaseValue "FLUN"; d2rq:rdfValue <http://evs.nci.nih.gov/ftp1/NDF-RT/NDF-RT.owl#N0000164430>]; #VAERS:#VO:INFLUENZA LIVE VACCINE, NASAL [VA Product]
+    d2rq:translation [ d2rq:databaseValue "FLUN(H1N1)"; d2rq:rdfValue <http://evs.nci.nih.gov/ftp1/NDF-RT/NDF-RT.owl#N0000181665>];#VAERS:#VO:INFLUENZA A (H1N1) MONOVALENT LIVE VACCINE,NASAL [VA Product] 
+    d2rq:translation [ d2rq:databaseValue "HBHEPB"; d2rq:rdfValue vaers:HBEPB]; #VAERS:HAEMOPHILUS B CONGUGATE VACCINE + HEPATITIS B
+    d2rq:translation [ d2rq:databaseValue "HBPV"; d2rq:rdfValue vaers:HBPV]; #VAERS:HAEMOPHILUS B POLYSACCHARIDE VACCINE
+    d2rq:translation [ d2rq:databaseValue "HEP"; d2rq:rdfValue obo:VO_0000644]; #VO:Hepatitis B virus vaccine #VAERS:HEPATITIS B VIRUS VACCINE              
+    d2rq:translation [ d2rq:databaseValue "HEPA"; d2rq:rdfValue obo:VO_0000646]; #VO:Hepatitis A virus vaccine #VAERS:HEPATITIS A
+    d2rq:translation [ d2rq:databaseValue "HEPAB"; d2rq:rdfValue obo:VO_0000745]; #VO:Hepatitis A&B vaccine #VAERS:HEPATITIS A + HEPATITIS B
+    d2rq:translation [ d2rq:databaseValue "HEPATYP"; d2rq:rdfValue obo:VO_0000950]; #VO:Salmonella typhi-Hepatitis A vaccine #VAERS:INACTIVATED HEPATITIS A + TYPHOID POLYSACCHARIDE VACCINE ADSORBED
+    d2rq:translation [ d2rq:databaseValue "HIBV"; d2rq:rdfValue vaers:HIBV]; #VAERS:HAEMOPHILUS B CONJUGATE VACCINE
+    d2rq:translation [ d2rq:databaseValue "HPV"; d2rq:rdfValue obo:VO_0000667]; #VO:human papillomavirus vaccine #VAERS:HUMAN PAPILLOMAVIRUS   
+    d2rq:translation [ d2rq:databaseValue "HPV2"; d2rq:rdfValue vaers:HPV2]; #VO:Vibrio cholerae vaccine #VAERS:HUMAN PAPILLOVAVIRUS BIVALENT
+    d2rq:translation [ d2rq:databaseValue "HPV4"; d2rq:rdfValue vaers:HPV4]; #VAERS:HUMAN PAPILLOVAVIRUS QUADRIVALENT
+    d2rq:translation [ d2rq:databaseValue "H5N1"; d2rq:rdfValue vaers:H5N1]; #VAERS:PANDEMIC FLU VACCINE
+    d2rq:translation [ d2rq:databaseValue "IPV"; d2rq:rdfValue vaers:IPV];   #VAERS:POLIOVIRUS VACCINE INACTIVATED
+    d2rq:translation [ d2rq:databaseValue "JEV"; d2rq:rdfValue vaers:JEV]; #VAERS:JAPANESE ENCEPHALITIS VIRUS VACCINE, INACTIVATED
+    d2rq:translation [ d2rq:databaseValue "JEV1"; d2rq:rdfValue vaers:JEV1]; #VAERS:JAPANESE ENCEPHALITIS VIRUS VACCINE, INACTIVATED, ADSORBED
+    d2rq:translation [ d2rq:databaseValue "LYME"; d2rq:rdfValue obo:VO_0000764];#VO:Lyme disease vaccine #VAERS:LYME DISEASE VACCINE
+    d2rq:translation [ d2rq:databaseValue "MEA"; d2rq:rdfValue obo:VO_0000654]; #VO:Measles virus vaccine #VAERS:MEASLES
+    d2rq:translation [ d2rq:databaseValue "MEN"; d2rq:rdfValue vaers:MEN];  #VAERS:MENINGOCOCCAL POLYSACCHARIDE VACCINE
+    d2rq:translation [ d2rq:databaseValue "MER"; d2rq:rdfValue obo:VO_0000945]; #VO:Measles-Rubella vaccine #VAERS:MEASLES AND RUBELLA VIRUS VACCINE, LIVE
+    d2rq:translation [ d2rq:databaseValue "MM"; d2rq:rdfValue obo:VO_0000736]; #VO:Measles-Mumps vaccine #VAERS:MEASLES AND MUMPS VIRUS VACCINE, LIVE
+    d2rq:translation [ d2rq:databaseValue "MMR"; d2rq:rdfValue obo:VO_0000731];#VO:Measles-Mumps-Rubella vaccine #VAERS:MEASLES, MUMPS AND RUBELLA VIRUS VACCINE, LIVE
+    d2rq:translation [ d2rq:databaseValue "MMRV"; d2rq:rdfValue obo:VO_0000737]; #VO:Measles-Mumps-Rubella-Varicella vaccine #VAERS:MEASLES, MUMPS, ROUBELLA AND VARICELLA VACCINE LIVE
+    d2rq:translation [ d2rq:databaseValue "MNC"; d2rq:rdfValue vaers:MNC]; #VAERS:MENINGOCOCCAL CONJUGATE VACCINE
+    d2rq:translation [ d2rq:databaseValue "MNQ"; d2rq:rdfValue vaers:MNQ]; #VAERS:MENINGOCOCCAL CONJUGATE VACCINE
+    d2rq:translation [ d2rq:databaseValue "MNQHIB"; d2rq:rdfValue vaers:MNQHIB]; #VAERS:MENINGOCOCCAL GROUPS C AND Y + HAEMOPHILUS B TETANUS TOXOID CONJUGATE VACCINE
+    d2rq:translation [ d2rq:databaseValue "MU"; d2rq:rdfValue obo:VO_0000656]; #VO:Mumps virus vaccine #VAERS:MUMPS VIRUS VACCINE, LIVE
+    d2rq:translation [ d2rq:databaseValue "MUR"; d2rq:rdfValue vaers:MUR]; #VO:Bacillus anthracis vaccine #VAERS:MUMPS AND RUBELLA VIRUS VACCINE, LIVE
+    d2rq:translation [ d2rq:databaseValue "OPV"; d2rq:rdfValue vaers:OPV];  #VAERS:POLIOVIRUS VACCINE TRIVALENT, LIVE, ORAL #not linked to  Poliovirus vaccine VO_0000664 as VAERS say "live and oral" while VO has some non oral under there   
+    d2rq:translation [ d2rq:databaseValue "PER"; d2rq:rdfValue obo:VO_0000765]; #VO:Bordetella pertussis vaccine  #VAERS:PERTUSSIS VACCINE
+    d2rq:translation [ d2rq:databaseValue "PLAGUE"; d2rq:rdfValue obo:VO_0000648]; #VO:Plague vaccine #VAERS:PLAGUE VACCINE
+    d2rq:translation [ d2rq:databaseValue "PNC"; d2rq:rdfValue vaers:PNC]; #VAERS:PNEUMOCOCCAL 7-VALENT CONJUGATE VACCINE
+    d2rq:translation [ d2rq:databaseValue "PNC13"; d2rq:rdfValue vaers:PNC13]; #VAERS:PNEUMOCOCCAL 13-VALENT CONJUGATE VACCINE
+    d2rq:translation [ d2rq:databaseValue "PPV"; d2rq:rdfValue vaers:PPV];    #VAERS:PNEUMOCOCCAL VACCINE, POLYVALENT
+    d2rq:translation [ d2rq:databaseValue "RAB"; d2rq:rdfValue obo:VO_0000650];#VO:Rabies virus vaccine #VAERS:RABIES VIRUS VACCINE
+    d2rq:translation [ d2rq:databaseValue "ROT"; d2rq:rdfValue obo:VO_0000658]; #VO:Rotavirus vaccine #VAERS:ROTAVIRUS VACCINE
+    d2rq:translation [ d2rq:databaseValue "ROTHB5"; d2rq:rdfValue obo:VO_0000658]; #VO:Rotavirus vaccine #VAERS:ROTAVIRUS VACCINE
+    d2rq:translation [ d2rq:databaseValue "ROTH1"; d2rq:rdfValue obo:VO_0000658]; #VO:Rotavirus vaccine #VAERS:ROTAVIRUS VACCINE
+    d2rq:translation [ d2rq:databaseValue "RUB"; d2rq:rdfValue obo:VO_0010637]; #VO:Rubella vaccine #VAERS:RUBELLA
+    d2rq:translation [ d2rq:databaseValue "RV"; d2rq:rdfValue obo:VO_0000658]; #VO:Rotavirus vaccine #VAERS:ROTAVIRUS
+    d2rq:translation [ d2rq:databaseValue "SMALL"; d2rq:rdfValue obo:VO_0000651]; #VO:Smallpox virus vaccine #VAERS:SMALLPOX VACCINE
+    d2rq:translation [ d2rq:databaseValue "SSEV"; d2rq:rdfValue vaers:SSEV]; #VAERS:SPRING/SUMMER ENCEPHALITIS VACCINE
+    d2rq:translation [ d2rq:databaseValue "TBE"; d2rq:rdfValue obo:VO_0012190];#VO:Tick-borne Encephalitis Virus (TBEV) vaccine #VAERS:TICK-BORNE ENCEPHALITIS VACCINE
+    d2rq:translation [ d2rq:databaseValue "TD"; d2rq:rdfValue obo:VO_0000732]; #VO:Diphtheria-Tetanus vaccine #VAERS: TETANUS AND DIPHTHERIA TOXOIDS, ADULT  
+    d2rq:translation [ d2rq:databaseValue "TDAP"; d2rq:rdfValue obo:VO_0000738];#VO:Diphtheria-Tetanus-Pertussis vaccine #VAERS:TETANUS TOXOID, REDUCED DIPHTHERIA TOXOID AND ACELLULAR PERTUSSIS VACCINE, ADSORBED
+    d2rq:translation [ d2rq:databaseValue "TTOX"; d2rq:rdfValue obo:VO_0000640];#VO:Clostridium tetani vaccine #VAERS:TETANUS TOXOID
+    d2rq:translation [ d2rq:databaseValue "TYP"; d2rq:rdfValue obo:VO_0000671];#VO:Salmonella typhi vaccine #VAERS:TYPHOID VACCINE
+    d2rq:translation [ d2rq:databaseValue "UNK"; d2rq:rdfValue vaers:unknown];  #VAERS:UNKNOWN VACCINE TYPE
+    d2rq:translation [ d2rq:databaseValue "VARCEL"; d2rq:rdfValue obo:VO_0000119]; #VO:Varivax #VAERS:VARIVAX-VARICELLA VIRUS LIVE
+    d2rq:translation [ d2rq:databaseValue "VARZOS"; d2rq:rdfValue obo:VO_0000669]; #VO:Varicella-zoster virus vaccine #VAERS:VARICELLA-ZOSTER VACCINE
+    d2rq:translation [ d2rq:databaseValue "YF"; d2rq:rdfValue obo:VO_0000123]; #VO:Yellow fever virus vaccine #VAERS: YELLOW FEVER VACCINE
+	.
+
+
+
+
+
+
+
+####################################################################################################################################################################################################################
+#Following properties are dependent on the vaccine AND the report ID
+####################################################################################################################################################################################################################
+
+
+
+	
+	
+	
+	
+	
+# we create a specific class which will "host" the details of the vaccine for this report. Its URI is VAX_NAME/VAERS_ID, e.g., http://localhost:2020/resource/HEP_A_%28HAVRIX%29/336390
+# vaccine/report specific properties can then be attached (route, dose, lot…)
+	map:VAERSVAX_VAX_NAME_IN_REPORT a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "@@VAERSVAX.VAX_NAME|urlify@@/@@VAERSDATA.VAERS_ID@@"@en;
+	d2rq:classDefinitionLabel "VAERSVAX VAX_NAME_IN_REPORT"@en;
+	d2rq:join "VAERSDATA.VAERS_ID => VAERSVAX.VAERS_ID";
+	.
+
+# this property links the instances of the VAX_NAME_IN_REPORT to the original report, such as report 336390 has_vaccine_details http://localhost:2020/resource/HEP_A_%28HAVRIX%29/336390
+map:VAERSVAX_VAX_DETAILS a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSDATA_VAERS_ID;
+	d2rq:property vocab:has_vaccine_details;
+	d2rq:propertyDefinitionLabel "VAERSVAX VAX_DETAILS"@en;
+	d2rq:refersToClassMap map:VAERSVAX_VAX_NAME_IN_REPORT;
+	d2rq:join "VAERSDATA.VAERS_ID => VAERSVAX.VAERS_ID";
+	.	
+		
+		
+		
+		
+
+################# Add the vaccine name again ##########################################################################################################			
+		
+	# Associate the instance created above to the instance of the report map:VAERSDATA_VAERS_ID by joining on the VAERS_ID values
+	# takes its value from the class map:VAERSVAX_VAXNAME
+map:has_vaccine2 a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSVAX_VAX_NAME_IN_REPORT;
+	d2rq:property vaers:has_vaccine;
+	d2rq:propertyDefinitionLabel "has_vaccine"@en;
+	d2rq:refersToClassMap map:VAERSVAX_VAX_NAME;
+	d2rq:join "VAERSDATA.VAERS_ID => VAERSVAX.VAERS_ID";
+	.
+	
+	
+	
+	
+	
+################# Vaccine route ##########################################################################################################	
+
+map:has_administration_route a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSVAX_VAX_NAME_IN_REPORT;
+	d2rq:property vocab:has_administration_route;
+	d2rq:uriColumn "VAERSVAX.VAX_ROUTE"@en;
+	d2rq:condition "VAERSVAX.VAX_ROUTE <> ''";
+	d2rq:translateWith map:AdministrationRouteTable;
+	.
+	
+
+		
+# we use a translation table to map the values from the database (IM, PO, …) to the proper classes/terms. See http://vaers.hhs.gov/data/README_January2013.pdf for the abbreviations definition.	
+map:AdministrationRouteTable a d2rq:TranslationTable;
+    d2rq:translation [ d2rq:databaseValue "IM"; d2rq:rdfValue obo:VO_0000340 ];
+    d2rq:translation [ d2rq:databaseValue "ID"; d2rq:rdfValue obo:VO_0000887 ];
+    d2rq:translation [ d2rq:databaseValue "UN"; d2rq:rdfValue vaers:unknown ];
+    d2rq:translation [ d2rq:databaseValue "SC"; d2rq:rdfValue obo:VO_0000532 ];
+    d2rq:translation [ d2rq:databaseValue "SQ"; d2rq:rdfValue obo:VO_0000532 ];
+    d2rq:translation [ d2rq:databaseValue "IN"; d2rq:rdfValue obo:VO_0000341 ];
+    d2rq:translation [ d2rq:databaseValue "PO"; d2rq:rdfValue obo:VO_0000886 ];
+    d2rq:translation [ d2rq:databaseValue "SYR"; d2rq:rdfValue vaers:needleAndSyrynge ];
+    d2rq:translation [ d2rq:databaseValue "JET"; d2rq:rdfValue vaers:needleFreeJet ];
+    d2rq:translation [ d2rq:databaseValue "OT"; d2rq:rdfValue vaers:other ];
+    .	
+    
+
+################# Vaccine lot ##########################################################################################################		
+map:VAERSVAX_VAX_LOT a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSVAX_VAX_NAME_IN_REPORT;
+	d2rq:property vocab:VAERSVAX_VAX_LOT;
+	d2rq:column "VAERSVAX.VAX_LOT";
+	d2rq:condition "VAERSVAX.VAX_LOT <> ''";
+	.
+	
+################# Vaccine dose ##########################################################################################################		
+map:VAERSVAX_VAX_DOSE a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSVAX_VAX_NAME_IN_REPORT;
+	d2rq:property vocab:VAERSVAX_VAX_DOSE;
+	d2rq:column "VAERSVAX.VAX_DOSE";
+	d2rq:condition "VAERSVAX.VAX_DOSE <> ''";
+	.
+	
+	
+################# Vaccine site ##########################################################################################################		
+map:VAERSVAX_VAX_SITE a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSVAX_VAX_NAME_IN_REPORT;
+	d2rq:property vocab:VAERSVAX_VAX_SITE;
+	d2rq:column "VAERSVAX.VAX_SITE";
+	d2rq:condition "VAERSVAX.VAX_SITE <> ''";
+	.
+	
+################# Vaccine manufacturer ##########################################################################################################	
+## I didn't expect manufacturer to be dependent on the report and vaccine (rather than just on the vaccine). however, in cases wher we have "no brand name" we can end up with the same vaccine produce by 2 different manufactureres
+## for example, TETANUS TOXOID (NO BRAND NAME) is manufactured by Sanofi AND unknonwn manufacturer in the 2013 dump.
+## However, we can't infer than the unknown manufacturer is sanofi, as other companies are producing tetanus toxoid vaccines
+
+	# instance of the OBI class manufacturer (OBI_0000835)
+	# transform the column value into URI (on condition the column is not empty)
+	# Those URIs then get mapped to VO manufacturers via Silk	
+	
+map:VAERSVAX_VAX_MANU a d2rq:ClassMap;
+d2rq:dataStorage map:database;
+	d2rq:uriPattern "@@VAERSVAX.VAX_MANU|urlify@@"@en;
+	d2rq:class obo:OBI_0000835; #OBI manufacturer class URI
+	d2rq:classDefinitionLabel "manufacturer";
+	d2rq:column "VAERSVAX_VAX_MANU";
+	d2rq:condition "VAERSVAX.VAX_MANU <> ''";
+	.
+	
+	# Add the label (i.e., value of the column) as property of the instance created above
+map:manufacturerLabel a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSVAX_VAX_MANU;
+	d2rq:property rdfs:label;
+	d2rq:pattern "@@VAERSVAX.VAX_MANU@@"@en;
+	d2rq:condition "VAERSVAX.VAX_MANU <> ''";
+	.
+		
+# Associate the instance created above to the instance of the report map:VAERSDATA_VAERS_ID by joining on the VAERS_ID values
+	# property is an instance of the OBI property
+	# takes its value from the class map:VAERSVAX_VAX_MANU
+map:has_manufacturer a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:VAERSVAX_VAX_NAME_IN_REPORT;
+	d2rq:property obo:OBI_0000304;
+	d2rq:propertyDefinitionLabel "is_manufactured_by"@en;
+	d2rq:refersToClassMap map:VAERSVAX_VAX_MANU;
+	d2rq:join "VAERSDATA.VAERS_ID => VAERSVAX.VAERS_ID";
+	.

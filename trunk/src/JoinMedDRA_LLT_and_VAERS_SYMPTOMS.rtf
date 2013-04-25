@@ -1,0 +1,48 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf510
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\b\fs24 \cf0 \ul \ulc0 ADD columns for MedDRA terms and update them by joining the table of symptoms with the table of LLTs
+\b0 \ulnone \
+\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\i \cf0 \ul SYMPTOM_1
+\i0 \ulnone \
+\
+ALTER TABLE `VAERSSYMPTOMS` ADD llt1_code bigint(20) after SYMPTOM_1;\
+ALTER TABLE `VAERSSYMPTOMS` ADD llt1_name varchar(100) after `llt1_code`;\
+\
+\
+UPDATE VAERSSYMPTOMS left join 1_low_level_term on VAERSSYMPTOMS.`SYMPTOM_1`=1_low_level_term.llt_name set VAERSSYMPTOMS.llt1_name=1_low_level_term.llt_name, VAERSSYMPTOMS.llt1_code=1_low_level_term.llt_code;\
+\
+\
+ALTER TABLE `VAERSSYMPTOMS` ADD llt2_code bigint(20) after SYMPTOM_2;\
+ALTER TABLE `VAERSSYMPTOMS` ADD llt2_name varchar(100) after `llt2_code`;\
+\
+\
+UPDATE VAERSSYMPTOMS left join 1_low_level_term on VAERSSYMPTOMS.`SYMPTOM_2`=1_low_level_term.llt_name set VAERSSYMPTOMS.llt2_name=1_low_level_term.llt_name, VAERSSYMPTOMS.llt2_code=1_low_level_term.llt_code;\
+\
+ALTER TABLE `VAERSSYMPTOMS` ADD llt3_code bigint(20) after SYMPTOM_3;\
+ALTER TABLE `VAERSSYMPTOMS` ADD llt3_name varchar(100) after `llt3_code`;\
+\
+\
+UPDATE VAERSSYMPTOMS left join 1_low_level_term on VAERSSYMPTOMS.`SYMPTOM_3`=1_low_level_term.llt_name set VAERSSYMPTOMS.llt3_name=1_low_level_term.llt_name, VAERSSYMPTOMS.llt3_code=1_low_level_term.llt_code;\
+\
+\
+ALTER TABLE `VAERSSYMPTOMS` ADD llt4_code bigint(20) after SYMPTOM_4;\
+ALTER TABLE `VAERSSYMPTOMS` ADD llt4_name varchar(100) after `llt4_code`;\
+\
+\
+UPDATE VAERSSYMPTOMS left join 1_low_level_term on VAERSSYMPTOMS.`SYMPTOM_4`=1_low_level_term.llt_name set VAERSSYMPTOMS.llt4_name=1_low_level_term.llt_name, VAERSSYMPTOMS.llt4_code=1_low_level_term.llt_code;\
+\
+\
+ALTER TABLE `VAERSSYMPTOMS` ADD llt5_code bigint(20) after SYMPTOM_5;\
+ALTER TABLE `VAERSSYMPTOMS` ADD llt5_name varchar(100) after `llt5_code`;\
+\
+\
+UPDATE VAERSSYMPTOMS left join 1_low_level_term on VAERSSYMPTOMS.`SYMPTOM_5`=1_low_level_term.llt_name set VAERSSYMPTOMS.llt5_name=1_low_level_term.llt_name, VAERSSYMPTOMS.llt5_code=1_low_level_term.llt_code;}
