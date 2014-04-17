@@ -5,8 +5,6 @@
 A step by step tutorial to generate RDF from the VAERS data at http://vaers.hhs.gov/data/data
 Relevant files under under this project's trunk, in the src directory.
 
-If you don't want to generate the RDF yourself, you can directly use the VAERS RDF dumps under SVN, in the data directory.
-
 
 = Details =
 
