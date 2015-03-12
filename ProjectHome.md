@@ -1,0 +1,1 @@
+An RDF export of the Vaccine Adverse Event reporting System data - http://vaers.hhs.gov
